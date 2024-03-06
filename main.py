@@ -1,5 +1,6 @@
 from flask import Flask, request, render_template, jsonify
-import query
+import queryRapidapi
+import queryMeteostat
 from dotenv import load_dotenv
 import os
 
@@ -18,7 +19,7 @@ def daily():
         lon = float(request.args.get('lon'))
     except:
         return "Request like this /daily?lat=51.61&lon=7.52 to get the weather data for today.", 400
-    return query.getPointDataDaily(lat, lon)
+    return queryRapidapi.getPointDataDaily(lat, lon)
 
 @app.route('/hourly')
 def hourly():
@@ -27,7 +28,7 @@ def hourly():
         lon = float(request.args.get('lon'))
     except:
         return "Request like this /hourly?lat=51.61&lon=7.52 to get the hourly weather data for today.", 400
-    return query.getPointDataHourly(lat, lon)
+    return queryRapidapi.getPointDataHourly(lat, lon)
 
 @app.route('/rapidapikey')
 def token():
@@ -36,5 +37,5 @@ def token():
     })
 
 if __name__ == "__main__":
-    #app.run(host="0.0.0.0", port=5000, debug=True)
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=5000, debug=True)
+    #app.run(host="0.0.0.0", port=5000)

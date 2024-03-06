@@ -1,5 +1,5 @@
 import requests
-import datetime
+import datetime as datetime
 from dotenv import load_dotenv
 import os
 
@@ -9,7 +9,7 @@ load_dotenv()
 
 def getPointDataDaily(lat, lon):
     url = "https://meteostat.p.rapidapi.com/point/daily"
-    date = datetime.datetime.now().date()
+    date = datetime.now().date()
 
     querystring = {"lat":lat,"lon":lon,"start":date,"end":date}
 
@@ -23,7 +23,7 @@ def getPointDataDaily(lat, lon):
 
 def getPointDataHourly(lat, lon):
     url = "https://meteostat.p.rapidapi.com/point/hourly"
-    date = datetime.datetime.now().date()
+    date = datetime.now().date()
 
     querystring = {"lat":lat,"lon":lon,"start":date,"end":date}
 

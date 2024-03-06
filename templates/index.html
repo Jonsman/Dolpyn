@@ -11,7 +11,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="../static/favicon-16x16.png">
     <!-- <link rel="manifest" href="../static/site.webmanifest"> -->
 </head>
-<body>
+<body class="d-flex flex-column" style="min-height: 100vh;">
     <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
@@ -33,32 +33,30 @@
     </nav>
 
     <!-- Hero Section -->
-    <header class="bg-primary text-white text-center py-5 mb-4">
+    <header class="bg-primary text-white text-center py-5">
         <div class="container">
             <h1 class="font-weight-light text-white">Dolpyn knows the weather</h1>
         </div>
     </header>
 
     <!-- Main Content -->
-    <div class="container py-3">
-        <div class="input-group top-0 start-50 translate-middle w-25">
+    <div class="d-flex flex-column flex-fill align-items-center py-1">
+        <div class="input-group w-25 my-3">
             <button class="btn btn-outline-secondary" type="button" onclick="searchLocation()" id="button">Search</button>
-            <input type="text" class="form-control" placeholder="Location" id="location">
+            <input type="text" class="form-control" placeholder="Location" id="location" style="min-width: 85px;">
         </div>
-        <div class="row">
-            <div id="map" class="col" style="height: 400px;"></div>
-            <div id="divlist" class="col">
-                <ul class="list-group" id="list">
-                    <li class="list-group-item" id="tavg">No data yet</li>
-                    <li class="list-group-item" id="tmin">No data yet</li>
-                    <li class="list-group-item" id="tmax">No data yet</li>
-                </ul>
-            </div>
+        <div id="map" class="shadow-sm flex-fill" style="width: 90vw; height: 20vh"></div>
+        <div id="divlist" class="py-3">
+            <ul class="list-group w-25" style="min-width: 250px; max-width: 300px;" id="list">
+                <li class="list-group-item text-wrap" id="tavg">Average Temperature:</li>
+                <li class="list-group-item text-wrap" id="tmin">Min Temperature:</li>
+                <li class="list-group-item text-wrap" id="tmax">Max Temperature:</li>
+            </ul>
         </div>
     </div>
 
     <!-- Footer -->
-    <footer class="py-3 bg-dark-subtle fixed-bottom">
+    <footer class="py-3 bg-dark-subtle">
         <div class="container">
             <p class="m-0 text-center text-black">
                 Created by Jonsman
