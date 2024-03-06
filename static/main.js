@@ -1,6 +1,6 @@
 // Using Leaflet
 // Initialize the map
-let map = L.map('map', {
+const map = L.map('map', {
     center: [30, 0],
     zoom: 1,
 });
@@ -38,12 +38,12 @@ fetch('/rapidapikey')
         rapidapikey = data['x-rapidapi-key'];
     });
 
-var date = new Date();
-var year = date.getFullYear();
-var month = ("0" + (date.getMonth() + 1)).slice(-2);  // Add 1 to month, and take the last two characters
-var day = ("0" + date.getDate()).slice(-2);  // Take the last two characters
+const date = new Date();
+const year = date.getFullYear();
+const month = ("0" + (date.getMonth() + 1)).slice(-2);  // Add 1 to month, and take the last two characters
+const day = ("0" + date.getDate()).slice(-2);  // Take the last two characters
 
-var formattedDate = year + "-" + month + "-" + day;
+const formattedDate = year + "-" + month + "-" + day;
 
 function fetchWeather(lat, lon) {
     fetch(`https://meteostat.p.rapidapi.com/point/daily?lat=${lat}&lon=${lon}&start=${formattedDate}&end=${formattedDate}`,{
