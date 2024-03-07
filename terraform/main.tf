@@ -5,16 +5,7 @@ terraform {
       source  = "hashicorp/azurerm"
       version = "3.94.0"
     }
-
-    docker = {
-      source  = "kreuzwerker/docker"
-      version = "3.0.2"
-    }
   }
-}
-
-provider "docker" {
-  host = "//./pipe/docker_engine"
 }
 
 provider "azurerm" {
@@ -25,21 +16,6 @@ provider "azurerm" {
   client_id       = "" # Fill in your client ID
   client_secret   = "" # Fill in your client secret
 }
-
-/*
-# Docker Resources
-resource "docker_image" "dockerdolpyn" {
-  name = "dolpyn"
-  build {
-    context = "."
-  }
-}
-
-resource "docker_tag" "dockerdolpyntag" {
-  source_image = docker_image.dockerdolpyn.latest
-  target_image = "${var.container_registry_name}/dolpyn:latest"
-}
-*/
 
 # Azure Resources
 resource "azurerm_resource_group" "rg-globalinfra" {
