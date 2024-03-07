@@ -20,10 +20,10 @@ provider "docker" {
 provider "azurerm" {
   features {}
 
-  subscription_id = ""      # Fill in your subscription ID
-  tenant_id       = ""      # Fill in your tenant ID
-  client_id       = ""      # Fill in your client ID
-  client_secret   = ""      # Fill in your client secret
+  subscription_id = "" # Fill in your subscription ID
+  tenant_id       = "" # Fill in your tenant ID
+  client_id       = "" # Fill in your client ID
+  client_secret   = "" # Fill in your client secret
 }
 
 /*
@@ -55,13 +55,15 @@ resource "azurerm_container_registry" "cr" {
   admin_enabled       = false
 }
 
+# Maybe add Key Vault for the secrets
+
 resource "azurerm_resource_group" "rg-dolpyn" {
   name     = var.resource_group_dolpyn["name"]
   location = var.resource_group_dolpyn["location"]
 }
 
 resource "azurerm_log_analytics_workspace" "log" {
-  name                = "acctest-01"
+  name                = var.log_analytics_workspace_name
   resource_group_name = azurerm_resource_group.rg-dolpyn.name
   location            = azurerm_resource_group.rg-dolpyn.location
   sku                 = "PerGB2018"
@@ -70,8 +72,8 @@ resource "azurerm_log_analytics_workspace" "log" {
 
 resource "azurerm_container_app_environment" "cae" {
   name                       = var.container_app_environment_name
-  resource_group_name        = var.resource_group_dolpyn["name"]
-  location                   = var.resource_group_dolpyn["location"]
+  resource_group_name        = azurerm_resource_group.rg-dolpyn.name
+  location                   = azurerm_resource_group.rg-dolpyn.location
   log_analytics_workspace_id = azurerm_log_analytics_workspace.log.id
 }
 

@@ -14,6 +14,10 @@ variable "resource_group_dolpyn" {
   }
 }
 
+variable "log_analytics_workspace_name" {
+  default = "log-dolpyn-prod-euwest-001"
+}
+
 variable "container_registry_name" {
   default = "crglobalinfraprod001"
 }
