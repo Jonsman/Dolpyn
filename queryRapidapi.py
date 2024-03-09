@@ -5,8 +5,6 @@ import os
 
 load_dotenv()
 
-
-
 def getPointDataDaily(lat, lon):
     url = "https://meteostat.p.rapidapi.com/point/daily"
     date = datetime.now().date()

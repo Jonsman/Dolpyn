@@ -1,11 +1,22 @@
-variable "resource_group_globalinfra" {
-  type = map(string)
-  default = {
-    name     = "rg-globalinfra-prod-euwest-001"
-    location = "westeurope"
-  }
+# Azure secrets
+variable "subscription_id" {
+  default = ""
 }
 
+variable "tenant_id" {
+  default = ""
+}
+
+variable "client_id" {
+  default = ""
+}
+
+variable "client_secret" {
+  default = ""
+}
+
+
+# Azure Resources
 variable "resource_group_dolpyn" {
   type = map(string)
   default = {
@@ -16,10 +27,6 @@ variable "resource_group_dolpyn" {
 
 variable "log_analytics_workspace_name" {
   default = "log-dolpyn-prod-euwest-001"
-}
-
-variable "container_registry_name" {
-  default = "crglobalinfraprod001"
 }
 
 variable "container_app_environment_name" {

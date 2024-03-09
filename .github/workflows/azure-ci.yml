@@ -1,0 +1,59 @@
+name: Azure CI
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Build Docker image
+      run: docker build -t dolpyn .
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: 1.7.4
+
+    - name: Setup Azure credentials
+      run: |
+        echo "ARM_SUBSCRIPTION_ID=${{ secrets.AZURE_SUBSCRIPTION_ID }}" >> $GITHUB_ENV
+        echo "ARM_CLIENT_ID=${{ secrets.AZURE_CLIENT_ID }}" >> $GITHUB_ENV
+        echo "ARM_CLIENT_SECRET=${{ secrets.AZURE_CLIENT_SECRET }}" >> $GITHUB_ENV
+        echo "ARM_TENANT_ID=${{ secrets.AZURE_TENANT_ID }}" >> $GITHUB_ENV
+
+    - name: Setup Terraform names
+      run: |
+        echo "TF_VAR_container_registry_name=${{ secrets.ACR_NAME }}" >> $GITHUB_ENV
+
+    - name: Terraform Init global_infra
+      run: terraform init
+      working-directory: ./terraform/global_infra
+
+    - name: Terraform Apply global_infra
+      run: terraform apply -auto-approve
+      working-directory: ./terraform/global_infra
+
+    - name: Get ACR admin password
+      run: echo "ACR_PASSWORD=$(terraform output -raw acr_admin_password)" >> $GITHUB_ENV
+
+    - name: Login to ACR
+      run: docker login ${{ secrets.ACR_NAME }}.azurecr.io -u ${{ secrets.ACR_NAME }} -p ${{ env.ACR_PASSWORD }}
+
+    - name: Push Docker image
+      run: |
+        docker tag dolpyn:latest ${{ secrets.ACR_NAME }}.azurecr.io/dolpyn:latest
+        docker push ${{ secrets.ACR_NAME }}.azurecr.io/dolpyn:latest
+
+    - name: Terraform Init container_app
+      run: terraform init
+      working-directory: ./terraform/container_app
+
+    - name: Terraform Apply container_app
+      run: terraform apply -auto-approve
+      working-directory: ./terraform/container_app

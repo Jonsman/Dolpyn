@@ -10,29 +10,15 @@ terraform {
 
 provider "azurerm" {
   features {}
-
-  subscription_id = "" # Fill in your subscription ID
-  tenant_id       = "" # Fill in your tenant ID
-  client_id       = "" # Fill in your client ID
-  client_secret   = "" # Fill in your client secret
+/*
+  subscription_id = var.subscription_id
+  tenant_id       = var.tenant_id
+  client_id       = var.client_id
+  client_secret   = var.client_secret
+  */
 }
 
 # Azure Resources
-resource "azurerm_resource_group" "rg-globalinfra" {
-  name     = var.resource_group_globalinfra["name"]
-  location = var.resource_group_globalinfra["location"]
-}
-
-resource "azurerm_container_registry" "cr" {
-  name                = var.container_registry_name
-  resource_group_name = azurerm_resource_group.rg-globalinfra.name
-  location            = azurerm_resource_group.rg-globalinfra.location
-  sku                 = "Basic"
-  admin_enabled       = false
-}
-
-# Maybe add Key Vault for the secrets
-
 resource "azurerm_resource_group" "rg-dolpyn" {
   name     = var.resource_group_dolpyn["name"]
   location = var.resource_group_dolpyn["location"]

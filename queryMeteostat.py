@@ -20,7 +20,7 @@ test = getMeteostatDaily(51.6167, 7.6167)
 print(test.info())
 
 tavg_data = test['tavg']
-tavg_data = tavg_data.astype(str)
+tavg_data = str(tavg_data)
 tmin_data = test['tmin']
 tmax_data = test['tmax']
 
