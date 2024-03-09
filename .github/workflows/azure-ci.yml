@@ -4,6 +4,13 @@ on:
   push:
     branches: [ main ]
 
+# Environment variables for terraform
+env:
+  ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+  ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+  ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+  ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -19,13 +26,6 @@ jobs:
       uses: hashicorp/setup-terraform@v3
       with:
         terraform_version: 1.7.4
-
-    - name: Setup Azure credentials
-      run: |
-        echo "ARM_SUBSCRIPTION_ID=${{ secrets.AZURE_SUBSCRIPTION_ID }}" >> $GITHUB_ENV
-        echo "ARM_CLIENT_ID=${{ secrets.AZURE_CLIENT_ID }}" >> $GITHUB_ENV
-        echo "ARM_CLIENT_SECRET=${{ secrets.AZURE_CLIENT_SECRET }}" >> $GITHUB_ENV
-        echo "ARM_TENANT_ID=${{ secrets.AZURE_TENANT_ID }}" >> $GITHUB_ENV
 
     - name: Setup Terraform names
       run: |
