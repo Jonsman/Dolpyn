@@ -6,10 +6,10 @@ on:
 
 # Set environment variables for terraform
 env:
-  ARM_CLIENT_SECRET: ${{ secrets.AZURE_CREDENTIALS[0] }}
-  ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_CREDENTIALS[1] }}
-  ARM_TENANT_ID: ${{ secrets.AZURE_CREDENTIALS[2] }}
-  ARM_CLIENT_ID: ${{ secrets.AZURE_CREDENTIALS[3] }}
+  ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+  ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+  ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+  ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
   TF_VAR_container_registry_name: ${{ secrets.ACR_NAME }}
 
 # Jobs to run
