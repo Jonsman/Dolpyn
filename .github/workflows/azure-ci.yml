@@ -6,10 +6,10 @@ on:
 
 # Set environment variables for terraform
 env:
-  ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-  ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-  ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
-  ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+  ARM_CLIENT_SECRET: ${{ secrets.AZURE_CREDENTIALS[0] }}
+  ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_CREDENTIALS[1] }}
+  ARM_TENANT_ID: ${{ secrets.AZURE_CREDENTIALS[2] }}
+  ARM_CLIENT_ID: ${{ secrets.AZURE_CREDENTIALS[3] }}
   TF_VAR_container_registry_name: ${{ secrets.ACR_NAME }}
 
 # Jobs to run
@@ -42,11 +42,8 @@ jobs:
       run: terraform apply -auto-approve
       working-directory: ./terraform/global_infra
 
-    - name: Get ACR admin password
-      run: echo "ACR_PASSWORD=$(terraform output -raw acr_admin_password)" >> $GITHUB_ENV
-
     - name: Login to ACR
-      run: docker login ${{ secrets.ACR_NAME }}.azurecr.io -u ${{ secrets.ACR_NAME }} -p ${{ env.ACR_PASSWORD }}
+      run: az acr login -name ${{ secrets.ACR_NAME }}
 
     - name: Push Docker image
       run: |
