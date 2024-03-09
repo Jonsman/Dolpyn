@@ -1,5 +1,12 @@
 # Provider Configuration
 terraform {
+  backend "azurerm" {
+    resource_group_name  = "rg-globalinfra-prod-euwest-001" # Can't use variables here
+    storage_account_name = "stdolpyndata001"                # Can't use variables here
+    container_name       = "terraform"                      # Can't use variables here
+    key                  = "terraform.tfstate"
+  }
+
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
@@ -10,12 +17,6 @@ terraform {
 
 provider "azurerm" {
   features {}
-/*
-  subscription_id = var.subscription_id
-  tenant_id       = var.tenant_id
-  client_id       = var.client_id
-  client_secret   = var.client_secret
-  */
 }
 
 # Azure Resources

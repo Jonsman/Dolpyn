@@ -1,12 +1,5 @@
 # Configuration
 terraform {
-  backend "azurerm" {
-    resource_group_name  = "rg-globalinfra-prod-euwest-001" # Can't use variables here
-    storage_account_name = "stdolpyndata001"                # Can't use variables here
-    container_name       = "terraform"                      # Can't use variables here
-    key                  = "terraform.tfstate"
-  }
-
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
@@ -39,18 +32,10 @@ resource "azurerm_storage_container" "storage-container" {
   container_access_type = "private"
 }
 
-resource "azurerm_container_registry" "cr" {
-  name                = var.container_registry_name
-  resource_group_name = azurerm_resource_group.rg-globalinfra.name
-  location            = azurerm_resource_group.rg-globalinfra.location
-  sku                 = "Basic"
-  admin_enabled       = true
-}
-
 resource "azurerm_storage_blob" "example" {
   name                   = "terraform.tfstate"
   storage_account_name   = azurerm_storage_account.st.name
   storage_container_name = azurerm_storage_container.storage-container.name
   type                   = "Block"
-  source                 = "./terraform/global_infra/terraform.tfstate"
+  source                 = "./terraform/initial_setup/terraform.tfstate"
 }
