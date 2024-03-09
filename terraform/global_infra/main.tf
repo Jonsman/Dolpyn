@@ -1,9 +1,9 @@
 # Configuration
 terraform {
   backend "azurerm" {
-    resource_group_name  = azurerm_resource_group.rg-globalinfra.name
-    storage_account_name = azurerm_storage_account.st.name
-    container_name       = azurerm_storage_container.name
+    resource_group_name  = var.resource_group_globalinfra["name"]
+    storage_account_name = var.storage_account_name
+    container_name       = var.storage_container_name
     key                  = "terraform.tfstate"
   }
 
