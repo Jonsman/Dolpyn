@@ -4,13 +4,15 @@ on:
   push:
     branches: [ main ]
 
-# Environment variables for terraform
+# Set environment variables for terraform
 env:
   ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
   ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
   ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
   ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+  TF_VAR_container_registry_name: ${{ secrets.ACR_NAME }}
 
+# Jobs to run
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -19,6 +21,11 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
+    - name: Login to Azure
+      uses: azure/login@v2
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
     - name: Build Docker image
       run: docker build -t dolpyn .
 
@@ -26,10 +33,6 @@ jobs:
       uses: hashicorp/setup-terraform@v3
       with:
         terraform_version: 1.7.4
-
-    - name: Setup Terraform names
-      run: |
-        echo "TF_VAR_container_registry_name=${{ secrets.ACR_NAME }}" >> $GITHUB_ENV
 
     - name: Terraform Init global_infra
       run: terraform init
