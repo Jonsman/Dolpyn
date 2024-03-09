@@ -25,6 +25,14 @@ variable "resource_group_globalinfra" {
   }
 }
 
+variable "storage_account_name" {
+  default = "stdolpyndata001"
+}
+
+variable "storage_container_name" {
+  default = "terraform"
+}
+
 variable "container_registry_name" {
   default = ""
 }
