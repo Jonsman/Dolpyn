@@ -6,6 +6,7 @@ variable "resource_group_dolpyn" {
   }
 }
 
+# Github environment variables
 variable "acr_name" {
   description = "container registry name"
   type        = string
