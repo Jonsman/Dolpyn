@@ -5,13 +5,6 @@ __pycache__
 # Terraform
 /terraform/.terraform
 
-/terraform/global_infra/.terraform
-/terraform/global_infra/.terraform.lock.hcl
-/terraform/global_infra/.terraform.tfstate.lock.info
-/terraform/global_infra/terraform.tfstate
-/terraform/global_infra/terraform.tfstate.backup
-/terraform/global_infra/terraform.tfvars
-
 /terraform/container_app/.terraform
 /terraform/container_app/.terraform.lock.hcl
 /terraform/container_app/.terraform.tfstate.lock.info

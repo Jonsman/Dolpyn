@@ -1,22 +1,3 @@
-# Azure secrets
-variable "subscription_id" {
-  default = ""
-}
-
-variable "tenant_id" {
-  default = ""
-}
-
-variable "client_id" {
-  default = ""
-}
-
-variable "client_secret" {
-  default = ""
-}
-
-
-# Azure Resources
 variable "resource_group_dolpyn" {
   type = map(string)
   default = {
@@ -33,6 +14,16 @@ variable "container_app_environment_name" {
   default = "cae-dolpyn-prod-euwest-001"
 }
 
+/*
+variable "container_registry_name" {
+  default = ""
+}
+*/
+
 variable "container_app_name" {
   default = "ca-dolpyn-prod-euwest-001"
+}
+
+variable "key_vault_name" {
+  default = "kv-globalinfra"
 }

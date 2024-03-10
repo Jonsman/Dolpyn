@@ -29,14 +29,6 @@ jobs:
       with:
         terraform_version: 1.7.4
 
-    - name: Terraform Init global_infra
-      run: terraform init
-      working-directory: ./terraform/global_infra
-
-    - name: Terraform Apply global_infra
-      run: terraform apply -auto-approve
-      working-directory: ./terraform/global_infra
-
     - name: Login to Azure as Service Principal
       uses: azure/login@v2
       with:
@@ -50,6 +42,9 @@ jobs:
         docker tag dolpyn:latest ${{ secrets.ACR_NAME }}.azurecr.io/dolpyn:latest
         docker push ${{ secrets.ACR_NAME }}.azurecr.io/dolpyn:latest
 
+    - name: Logout of Azure
+      run: az logout
+
     - name: Terraform Init container_app
       run: terraform init
       working-directory: ./terraform/container_app
@@ -57,6 +52,3 @@ jobs:
     - name: Terraform Apply container_app
       run: terraform apply -auto-approve
       working-directory: ./terraform/container_app
-
-    - name: Logout of Azure
-      run: az logout

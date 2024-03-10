@@ -1,9 +1,9 @@
 # Provider Configuration
 terraform {
   backend "azurerm" {
-    resource_group_name  = "rg-globalinfra-prod-euwest-001" # Must be deployed by hand first
-    storage_account_name = "stdolpyndata001"                # Must be deployed by hand first
-    container_name       = "terraform"                      # Must be deployed by hand first
+    resource_group_name  = "rg-globalinfra-prod-euwest-001" # Must be deployed first
+    storage_account_name = "stdolpyndata001"                # Must be deployed first
+    container_name       = "terraform"                      # Must be deployed first
     key                  = "terraform.tfstate"
   }
 
@@ -31,6 +31,14 @@ resource "azurerm_log_analytics_workspace" "log" {
   location            = azurerm_resource_group.rg-dolpyn.location
   sku                 = "PerGB2018"
   retention_in_days   = 30
+}
+
+resource "azurerm_container_registry" "cr" {
+  name                = TF_VAR_container_registry_name
+  resource_group_name = azurerm_resource_group.rg-dolpyn.name
+  location            = azurerm_resource_group.rg-dolpyn.location
+  sku                 = "Basic"
+  admin_enabled       = true
 }
 
 resource "azurerm_container_app_environment" "cae" {
