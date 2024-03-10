@@ -20,5 +20,5 @@ variable "container_app_name" {
 
 variable "acr_name" {
   description = "value"
-  type = string
+  type        = string
 }
