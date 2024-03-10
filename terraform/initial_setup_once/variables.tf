@@ -13,3 +13,8 @@ variable "storage_account_name" {
 variable "storage_container_name" {
   default = "terraform"
 }
+
+# tfvars secret
+variable "container_registry" {
+  default = ""
+}

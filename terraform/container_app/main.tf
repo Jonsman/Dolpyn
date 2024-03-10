@@ -33,14 +33,6 @@ resource "azurerm_log_analytics_workspace" "log" {
   retention_in_days   = 30
 }
 
-resource "azurerm_container_registry" "cr" {
-  name                = TF_VAR_container_registry_name
-  resource_group_name = azurerm_resource_group.rg-dolpyn.name
-  location            = azurerm_resource_group.rg-dolpyn.location
-  sku                 = "Basic"
-  admin_enabled       = true
-}
-
 resource "azurerm_container_app_environment" "cae" {
   name                       = var.container_app_environment_name
   resource_group_name        = azurerm_resource_group.rg-dolpyn.name

@@ -21,9 +21,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Build Docker image
-      run: docker build -t dolpyn .
-
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v3
       with:
@@ -35,7 +32,10 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
     - name: Login to ACR
-      run: az acr login -name ${{ secrets.ACR_NAME }}
+      run: az acr login -n ${{ secrets.ACR_NAME }}
+
+    - name: Build Docker image
+      run: docker build -t dolpyn .
 
     - name: Push Docker image
       run: |

@@ -18,6 +18,14 @@ resource "azurerm_resource_group" "rg-globalinfra" {
   location = var.resource_group_globalinfra["location"]
 }
 
+resource "azurerm_container_registry" "cr" {
+  name                = var.container_registry
+  resource_group_name = azurerm_resource_group.rg-globalinfra.name
+  location            = azurerm_resource_group.rg-globalinfra.location
+  sku                 = "Basic"
+  admin_enabled       = true
+}
+
 resource "azurerm_storage_account" "st" {
   name                     = var.storage_account_name
   resource_group_name      = azurerm_resource_group.rg-globalinfra.name

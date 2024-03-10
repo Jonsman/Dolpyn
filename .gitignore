@@ -10,10 +10,10 @@ __pycache__
 /terraform/container_app/.terraform.tfstate.lock.info
 /terraform/container_app/terraform.tfstate
 /terraform/container_app/terraform.tfstate.backup
-/terraform/container_app/terraform.tfvars
 
-/terraform/initial_setup/.terraform
-/terraform/initial_setup/.terraform.lock.hcl
-/terraform/initial_setup/.terraform.tfstate.lock.info
-/terraform/initial_setup/terraform.tfstate
-/terraform/initial_setup/terraform.tfstate.backup
+/terraform/initial_setup_once/.terraform
+/terraform/initial_setup_once/.terraform.lock.hcl
+/terraform/initial_setup_once/.terraform.tfstate.lock.info
+/terraform/initial_setup_once/terraform.tfstate
+/terraform/initial_setup_once/terraform.tfstate.backup
+/terraform/initial_setup_once/terraform.tfvars
