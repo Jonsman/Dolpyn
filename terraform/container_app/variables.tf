@@ -14,16 +14,10 @@ variable "container_app_environment_name" {
   default = "cae-dolpyn-prod-euwest-001"
 }
 
-/*
-variable "container_registry_name" {
-  default = ""
-}
-*/
-
 variable "container_app_name" {
   default = "ca-dolpyn-prod-euwest-001"
 }
 
-variable "key_vault_name" {
-  default = "kv-globalinfra"
+variable "acr_name" {
+  default = ""
 }

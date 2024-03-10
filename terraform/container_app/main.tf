@@ -40,7 +40,6 @@ resource "azurerm_container_app_environment" "cae" {
   log_analytics_workspace_id = azurerm_log_analytics_workspace.log.id
 }
 
-/*
 resource "azurerm_container_app" "ca" {
   name                         = var.container_app_name
   resource_group_name          = var.resource_group_dolpyn["name"]
@@ -59,10 +58,9 @@ resource "azurerm_container_app" "ca" {
   template {
     container {
       name   = "dolpyn"
-      image  = "crglobalinfraprod001/dolpyn"
+      image  = var.{acr_name}/dolpyn:latest
       cpu    = 0.25
       memory = "0.5Gi"
     }
   }
 }
-*/
