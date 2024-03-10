@@ -44,8 +44,7 @@ resource "azurerm_container_app" "ca" {
   name                         = var.container_app_name
   resource_group_name          = var.resource_group_dolpyn["name"]
   container_app_environment_id = azurerm_container_app_environment.cae.id
-  #revision_mode                = "Multiple"
-  revision_mode = "Single"
+  revision_mode                = "Single"
 
   ingress {
     target_port      = 5000
@@ -53,15 +52,14 @@ resource "azurerm_container_app" "ca" {
 
     traffic_weight {
       latest_revision = true
-      percentage = 100
+      percentage      = 100
     }
   }
 
   template {
     container {
-      name = "dolpyn"
-      #image  = "${var.acr_name}.azurecr.io/dolpyn:latest"
-      image  = "mcr.microsoft.com/azuredocs/containerapps-helloworld:latest"
+      name   = "dolpyn"
+      image  = var.acr_name + "azurecr.io/dolpyn:latest"
       cpu    = 0.25
       memory = "0.5Gi"
     }

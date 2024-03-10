@@ -19,6 +19,6 @@ variable "container_app_name" {
 }
 
 variable "acr_name" {
-  description = "value"
+  description = "container registry name"
   type        = string
 }
