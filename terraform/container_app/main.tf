@@ -59,7 +59,7 @@ resource "azurerm_container_app" "ca" {
   template {
     container {
       name   = "dolpyn"
-      image  = var.acr_name + "azurecr.io/dolpyn:latest"
+      image  = "${var.acr_name}.azurecr.io/dolpyn:latest"
       cpu    = 0.25
       memory = "0.5Gi"
     }
