@@ -44,10 +44,9 @@ resource "azurerm_container_app" "ca" {
   name                         = var.container_app_name
   resource_group_name          = var.resource_group_dolpyn["name"]
   container_app_environment_id = azurerm_container_app_environment.cae.id
-  #revision_mode                = "Multiple"
-  revision_mode = "Single"
+  revision_mode                = "Multiple"
+  #revision_mode = "Single"
 
-  /*
   ingress {
     target_port      = 5000
     external_enabled = true
@@ -55,7 +54,7 @@ resource "azurerm_container_app" "ca" {
     traffic_weight {
       percentage = 100
     }
-  }*/
+  }
 
   template {
     container {
