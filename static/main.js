@@ -60,5 +60,10 @@ function fetchWeather(lat, lon) {
             document.getElementById('tmin').textContent = 'Min Temperature: ' + data.data[0].tmin + '°C';
             document.getElementById('tmax').textContent = 'Max Temperature: ' + data.data[0].tmax + '°C';
         }
+        else {
+            document.getElementById('tavg').textContent = 'Average Temperature: N/A';
+            document.getElementById('tmin').textContent = 'Min Temperature: N/A';
+            document.getElementById('tmax').textContent = 'Max Temperature: N/A';
+        }
     });
 }
