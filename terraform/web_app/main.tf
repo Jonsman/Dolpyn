@@ -40,7 +40,7 @@ resource "azurerm_linux_web_app" "web-dolpyn" {
   service_plan_id     = azurerm_service_plan.asp.id
 
   app_settings = {
-    "RAPID_API_KEY" = "var.rapid_api_key"
+    "RAPID_API_KEY" = var.rapid_api_key
   }
 
   site_config {
