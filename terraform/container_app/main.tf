@@ -43,6 +43,8 @@ resource "azurerm_linux_web_app" "web-dolpyn" {
     application_stack {
       docker_image_name   = "dolpyn:latest"
       docker_registry_url = "https://${var.acr_name}.azurecr.io"
+      docker_registry_username = var.client_id
+      docker_registry_password = var.client_secret
     }
   }
 }

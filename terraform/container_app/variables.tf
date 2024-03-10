@@ -22,3 +22,13 @@ variable "acr_name" {
   description = "container registry name"
   type        = string
 }
+
+variable "client_id" {
+  description = "sevice principle client id"
+  type        = string
+}
+
+variable "client_secret" {
+  description = "service principle client secret"
+  type        = string
+}

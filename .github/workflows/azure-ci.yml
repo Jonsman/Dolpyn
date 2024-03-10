@@ -11,6 +11,8 @@ env:
   ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
   ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
   TF_VAR_acr_name: ${{ secrets.ACR_NAME }}
+  TF_VAR_client_id: ${{ secrets.AZURE_CLIENT_ID }}
+  TF_VAR_client_secret: ${{ secrets.AZURE_CLIENT_SECRET }}
 
 # Jobs to run
 jobs:
@@ -41,9 +43,6 @@ jobs:
       run: |
         docker tag dolpyn:latest ${{ secrets.ACR_NAME }}.azurecr.io/dolpyn:latest
         docker push ${{ secrets.ACR_NAME }}.azurecr.io/dolpyn:latest
-
-    #- name: Logout of Azure
-    #  run: az logout
 
     - name: Terraform Init container_app
       run: terraform init
