@@ -10,7 +10,7 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "3.94.0"
+      version = "3.95.0"
     }
   }
 }
@@ -25,6 +25,29 @@ resource "azurerm_resource_group" "rg-dolpyn" {
   location = var.resource_group_dolpyn["location"]
 }
 
+resource "azurerm_service_plan" "asp" {
+  name                = "ASP-rgdolpynprodeuwest001"
+  resource_group_name = azurerm_resource_group.rg-dolpyn.name
+  location            = azurerm_resource_group.rg-dolpyn.location
+  os_type             = "Linux"
+  sku_name            = "P1v2"
+}
+
+resource "azurerm_linux_web_app" "web-dolpyn" {
+  name                = "dolpyn"
+  resource_group_name = azurerm_resource_group.rg-dolpyn.name
+  location            = azurerm_service_plan.asp.location
+  service_plan_id     = azurerm_service_plan.asp.id
+
+  site_config {
+    application_stack {
+      docker_image_name   = "dolpyn:latest"
+      docker_registry_url = "https://${var.acr_name}.azurecr.io"
+    }
+  }
+}
+
+/*
 resource "azurerm_log_analytics_workspace" "log" {
   name                = var.log_analytics_workspace_name
   resource_group_name = azurerm_resource_group.rg-dolpyn.name
@@ -59,10 +82,10 @@ resource "azurerm_container_app" "ca" {
   template {
     container {
       name = "dolpyn"
-      #image  = "${var.acr_name}.azurecr.io/dolpyn:latest"
-      image  = "crglobalinfraprod001.azurecr.io/dolpyn:latest"
+      image  = "${var.acr_name}.azurecr.io/dolpyn:latest"
       cpu    = 0.25
       memory = "0.5Gi"
     }
   }
 }
+*/

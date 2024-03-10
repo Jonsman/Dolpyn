@@ -3,7 +3,7 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "3.94.0"
+      version = "3.95.0"
     }
   }
 }
@@ -24,6 +24,10 @@ resource "azurerm_container_registry" "cr" {
   location            = azurerm_resource_group.rg-globalinfra.location
   sku                 = "Basic"
   admin_enabled       = true
+
+  identity {
+    type = "SystemAssigned"
+  }
 }
 
 resource "azurerm_storage_account" "st" {
