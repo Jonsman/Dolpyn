@@ -5,11 +5,11 @@ __pycache__
 # Terraform
 /terraform/.terraform
 
-/terraform/container_app/.terraform
-/terraform/container_app/.terraform.lock.hcl
-/terraform/container_app/.terraform.tfstate.lock.info
-/terraform/container_app/terraform.tfstate
-/terraform/container_app/terraform.tfstate.backup
+/terraform/web_app/.terraform
+/terraform/web_app/.terraform.lock.hcl
+/terraform/web_app/.terraform.tfstate.lock.info
+/terraform/web_app/terraform.tfstate
+/terraform/web_app/terraform.tfstate.backup
 
 /terraform/initial_setup_once/.terraform
 /terraform/initial_setup_once/.terraform.lock.hcl
