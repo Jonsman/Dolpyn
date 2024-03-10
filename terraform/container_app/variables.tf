@@ -32,3 +32,8 @@ variable "client_secret" {
   description = "service principle client secret"
   type        = string
 }
+
+variable "rapid_api_key" {
+  description = "rapid api key"
+  type        = string
+}
