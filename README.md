@@ -4,6 +4,7 @@
 * Leaflet
 * OpenStreetMap
 * Meteostat over Rapidapi https://rapidapi.com/meteostat/api/meteostat
+* Bootstrap
 
 ## prerequisites
 

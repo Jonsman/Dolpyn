@@ -1,9 +1,9 @@
 # Configuration
 terraform {
   backend "azurerm" {
-    resource_group_name  = "rg-globalinfra-prod-euwest-001" # Can't use variables here
-    storage_account_name = "stdolpyndata001"                # Can't use variables here
-    container_name       = "terraform"                      # Can't use variables here
+    resource_group_name  = "rg-globalinfra-prod-euwest-001" # Must be deployed by hand first
+    storage_account_name = "stdolpyndata001"                # Must be deployed by hand first
+    container_name       = "terraform"                      # Must be deployed by hand first
     key                  = "terraform.tfstate"
   }
 
