@@ -45,11 +45,6 @@ jobs:
     - name: Logout of Azure
       run: az logout
 
-    - name: echo values
-      run: |
-        echo ${{ secrets.ACR_NAME }}
-        echo TF_VAR_acr_name
-
     - name: Terraform Init container_app
       run: terraform init
       working-directory: ./terraform/container_app
