@@ -39,10 +39,14 @@ resource "azurerm_linux_web_app" "web-dolpyn" {
   location            = azurerm_service_plan.asp.location
   service_plan_id     = azurerm_service_plan.asp.id
 
+  app_settings = {
+    "RAPID_API_KEY" = "var.rapid_api_key"
+  }
+
   site_config {
     application_stack {
-      docker_image_name   = "dolpyn:latest"
-      docker_registry_url = "https://${var.acr_name}.azurecr.io"
+      docker_image_name        = "dolpyn:latest"
+      docker_registry_url      = "https://${var.acr_name}.azurecr.io"
       docker_registry_username = var.client_id
       docker_registry_password = var.client_secret
     }
@@ -71,6 +75,12 @@ resource "azurerm_container_app" "ca" {
   container_app_environment_id = azurerm_container_app_environment.cae.id
   revision_mode                = "Single"
 
+  registry {
+    server               = "${var.acr_name}.azurecr.io"
+    username             = "" # needs a system assigned identity
+    password_secret_name = "" # needs a secret reference to key vault
+  }
+
   ingress {
     target_port      = 5000
     external_enabled = true
@@ -83,7 +93,7 @@ resource "azurerm_container_app" "ca" {
 
   template {
     container {
-      name = "dolpyn"
+      name   = "dolpyn"
       image  = "${var.acr_name}.azurecr.io/dolpyn:latest"
       cpu    = 0.25
       memory = "0.5Gi"
