@@ -42,8 +42,8 @@ jobs:
         docker tag dolpyn:latest ${{ secrets.ACR_NAME }}.azurecr.io/dolpyn:latest
         docker push ${{ secrets.ACR_NAME }}.azurecr.io/dolpyn:latest
 
-    - name: Logout of Azure
-      run: az logout
+    #- name: Logout of Azure
+    #  run: az logout
 
     - name: Terraform Init container_app
       run: terraform init
