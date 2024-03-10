@@ -19,5 +19,6 @@ variable "container_app_name" {
 }
 
 variable "acr_name" {
-  default = ""
+  description = "value"
+  type = string
 }
