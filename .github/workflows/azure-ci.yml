@@ -45,10 +45,10 @@ jobs:
         docker tag dolpyn:latest ${{ secrets.ACR_NAME }}.azurecr.io/dolpyn:latest
         docker push ${{ secrets.ACR_NAME }}.azurecr.io/dolpyn:latest
 
-    - name: Terraform Init container_app
+    - name: Terraform Init web_app
       run: terraform init
-      working-directory: ./terraform/container_app
+      working-directory: ./terraform/web_app
 
-    - name: Terraform Apply container_app
+    - name: Terraform Apply web_app
       run: terraform apply -auto-approve
-      working-directory: ./terraform/container_app
+      working-directory: ./terraform/web_app

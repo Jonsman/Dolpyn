@@ -1,4 +1,4 @@
-# Provider Configuration
+# Configuration
 terraform {
   backend "azurerm" {
     resource_group_name  = "rg-globalinfra-prod-euwest-001" # Must be deployed first
@@ -52,52 +52,3 @@ resource "azurerm_linux_web_app" "web-dolpyn" {
     }
   }
 }
-
-/*
-resource "azurerm_log_analytics_workspace" "log" {
-  name                = var.log_analytics_workspace_name
-  resource_group_name = azurerm_resource_group.rg-dolpyn.name
-  location            = azurerm_resource_group.rg-dolpyn.location
-  sku                 = "PerGB2018"
-  retention_in_days   = 30
-}
-
-resource "azurerm_container_app_environment" "cae" {
-  name                       = var.container_app_environment_name
-  resource_group_name        = azurerm_resource_group.rg-dolpyn.name
-  location                   = azurerm_resource_group.rg-dolpyn.location
-  log_analytics_workspace_id = azurerm_log_analytics_workspace.log.id
-}
-
-resource "azurerm_container_app" "ca" {
-  name                         = var.container_app_name
-  resource_group_name          = var.resource_group_dolpyn["name"]
-  container_app_environment_id = azurerm_container_app_environment.cae.id
-  revision_mode                = "Single"
-
-  registry {
-    server               = "${var.acr_name}.azurecr.io"
-    username             = "" # needs a system assigned identity
-    password_secret_name = "" # needs a secret reference to key vault
-  }
-
-  ingress {
-    target_port      = 5000
-    external_enabled = true
-
-    traffic_weight {
-      latest_revision = true
-      percentage      = 100
-    }
-  }
-
-  template {
-    container {
-      name   = "dolpyn"
-      image  = "${var.acr_name}.azurecr.io/dolpyn:latest"
-      cpu    = 0.25
-      memory = "0.5Gi"
-    }
-  }
-}
-*/

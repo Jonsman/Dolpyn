@@ -1,0 +1,33 @@
+name: Destroy Azure Web App (manual)
+
+on:
+  workflow_dispatch:
+
+# Set environment variables for terraform
+env:
+    ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+    ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+    ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+    ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+
+# Jobs to run
+jobs:
+  destroy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: 1.7.4
+
+    - name: Terraform Init web_app
+      run: terraform init
+      working-directory: ./terraform/web_app
+
+    - name: Terraform Destroy web_app
+      run: terraform destroy -auto-approve
+      working-directory: ./terraform/web_app
