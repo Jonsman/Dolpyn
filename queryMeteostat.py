@@ -14,16 +14,3 @@ def getMeteostatHourly(lat, lon):
     weather = Hourly(point, date, date)
     weather = weather.fetch()
     return weather
-
-'''
-test = getMeteostatDaily(51.6167, 7.6167)
-print(test.info())
-
-tavg_data = test['tavg']
-tavg_data = str(tavg_data)
-tmin_data = test['tmin']
-tmax_data = test['tmax']
-
-print(tavg_data)
-print(type(tavg_data))
-'''
